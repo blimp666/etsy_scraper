@@ -2,5 +2,5 @@
 *~
 .#*
 
-# rubocop result
-/result.json
+# scraped data directory
+scraped_data
