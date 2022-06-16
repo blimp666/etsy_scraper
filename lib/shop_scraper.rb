@@ -8,9 +8,9 @@ class ShopScraper
   BASE_URL = 'https://www.etsy.com/shop/'
   REVIEWS_ORDER = 'Recency' # 'Relevancy' or 'Recency'
 
-  def initialize(shop_name)
-    @shop_name = shop_name
-    @response = Nokogiri::HTML(URI.open("#{BASE_URL}#{shop_name}"))
+  def initialize(shop_url)
+    @shop_name = shop_url.split('?').first
+    @response = Nokogiri::HTML(URI.open("#{BASE_URL}#{shop_url}"))
   end
 
   def scrape(review_pages_number_to_scrape = 3)
@@ -18,10 +18,9 @@ class ShopScraper
       profile_data: parse_seller_data,
       reviews: scrape_reviews(pages_number = 3)
     }
-    #page.search('script[type="application/ld+json"]')
   end
 
-  #  private
+  private
 
   def scrape_reviews(pages_number)
     1.upto(pages_number).map { |i| scrape_reviews_page(i) }.flatten

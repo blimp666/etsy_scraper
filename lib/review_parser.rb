@@ -20,10 +20,10 @@ class ReviewParser
     end.to_h
   end
 
-  # private
+  private
 
   def get_reviewer_name(selector)
-    @review_source.at_css(selector).text
+    @review_source.at_css(selector)&.text
   end
 
   def get_reviewer_text(selector)
